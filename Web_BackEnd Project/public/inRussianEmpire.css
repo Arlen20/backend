@@ -1,0 +1,114 @@
+.clean {
+	clear: both;
+}
+
+@media only screen and (max-width: 1200px) {
+	#consequences img {
+		height: 250px;
+	}
+}
+@media only screen and (max-width: 767.5px) {
+	#consequences img {
+		height: 400px;
+	}
+}
+
+/* ---------------------------- section ----------------------------- */
+
+section {
+	padding-top: 150px;
+	padding-bottom: 150px;
+}
+
+section .tab-content p {
+	margin-top: 20px;
+	text-indent: 30px;
+	text-align: justify;
+	text-align-last: left;
+}
+
+section a.btn {
+	font-size: 1.6em;
+	padding-top: 0;
+}
+
+.mySectionImg {
+	position: relative;
+	background-image: url('img/jailau.avif');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: 80% 0;
+	width: 100%;
+	height: 400px;
+}
+
+.myCard {
+	position: relative;
+	height: 300px;
+	padding-top: 90px;
+	background-color: #3cd68e;
+	text-align: center;
+}
+.overlay {
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	right: 0;
+	background-color: #008cba;
+	overflow: hidden;
+	width: 100%;
+	height: 0;
+	transition: 0.5s ease;
+}
+.myCard:hover .overlay {
+	bottom: 0;
+	height: 100%;
+}
+.text {
+	color: white;
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	/*-webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);*/
+	transform: translate(-12%, 20%);
+	text-align: center;
+}
+
+.myCard p {
+	font-size: 2em;
+	color: white;
+}
+
+/* ---------------------------- footer ----------------------------- */
+
+footer .fa {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	padding-top: 15px;
+	font-size: 30px;
+	text-align: center;
+	text-decoration: none;
+	margin: 5px 2px;
+}
+footer .fa:hover {
+	opacity: 0.7;
+}
+.fa-facebook {
+	background: #3b5998;
+	color: white;
+}
+.fa-twitter {
+	background: #55acee;
+	color: white;
+}
+.fa-instagram {
+	background: #125688;
+	color: white;
+}
+.fa-reddit {
+	background: #ff5700;
+	color: white;
+}

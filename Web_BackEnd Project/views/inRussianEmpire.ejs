@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="inRussianEmpire.css" />
+		<link rel="icon" href="uploads/favicon.png" type="image/ico" />
+		<title>In Russian Empire</title>
+	</head>
+	<body>
+		<nav class="navbar fixed-top navbar-expand-lg bg-body-secondary">
+			<div class="container">
+				<a class="navbar-brand" href="/">History of Kazakhstan</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div
+					class="collapse navbar-collapse justify-content-between"
+					id="navbarNav"
+				>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/">home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a
+								class="nav-link dropdown-toggle"
+								href=""
+								data-bs-toggle="dropdown"
+								>content</a
+							>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="/kazakhKhanate"
+										>Kazakh Khanate</a
+									>
+								</li>
+								<li><hr class="dropdown-divider" /></li>
+								<li>
+									<a class="dropdown-item active" href="/inRussianEmpire"
+										>In Russian Empire</a
+									>
+								</li>
+								<li><hr class="dropdown-divider" /></li>
+								<li>
+									<a class="dropdown-item" href="/partOfUSSR"
+										>The Part of USSR</a
+									>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/quiz">quiz</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#contact">contacts</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								data-bs-toggle="modal"
+								data-bs-target="#loginModal"
+								href="#"
+								>Login</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								data-bs-toggle="modal"
+								data-bs-target="#registerModal"
+								href="#"
+								>Registration</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Login</h4>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+						></button>
+					</div>
+					<form>
+						<div class="modal-body">
+							<div class="form-floating mb-3 mt-3">
+								<input
+									type="text"
+									class="form-control"
+									id="email"
+									placeholder="Enter email"
+									name="email"
+								/>
+								<label for="email">Email</label>
+							</div>
+							<div class="form-floating mt-3 mb-3">
+								<input
+									type="text"
+									class="form-control"
+									id="pwd"
+									placeholder="Enter password"
+									name="pswd"
+								/>
+								<label for="pwd">Password</label>
+							</div>
+						</div>
+
+						<div class="d-flex modal-footer justify-content-between">
+							<input
+								type="submit"
+								class="form-control text-bg-primary"
+								value="login"
+								style="width: 80px"
+							/>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-dismiss="modal"
+							>
+								Close
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="registerModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Registration</h4>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+						></button>
+					</div>
+					<form>
+						<div class="modal-body">
+							<div class="input-group mb-3">
+								<span class="input-group-text">Person</span>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="First Name"
+								/>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Last Name"
+								/>
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text">@</span>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Username"
+								/>
+							</div>
+							<div class="form-floating mb-3 mt-3">
+								<input
+									type="text"
+									class="form-control"
+									id="email"
+									placeholder="Enter email"
+									name="email"
+								/>
+								<label for="email">Email</label>
+							</div>
+							<div class="form-floating mt-3 mb-3">
+								<input
+									type="text"
+									class="form-control"
+									id="pwd"
+									placeholder="Enter password"
+									name="pswd"
+								/>
+								<label for="pwd">Password</label>
+							</div>
+						</div>
+
+						<div class="d-flex modal-footer justify-content-between">
+							<input
+								type="submit"
+								class="form-control text-bg-primary"
+								value="login"
+								style="width: 80px"
+							/>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-dismiss="modal"
+							>
+								Close
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<section class="container">
+			<div style="width: 100%; margin-bottom: 100px; text-align: center">
+				<h2>Kazakhstan In Russian Empire (1847 - 1922 yy.)</h2>
+			</div>
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active" data-bs-toggle="tab" href="#beforeInvasion"
+						>Before Invasion</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-bs-toggle="tab" href="#invasionOfTheEmpire"
+						>Invasion of The Empire</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-bs-toggle="tab" href="#consequences"
+						>Consequences</a
+					>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane container active" id="beforeInvasion">
+					<p>
+						Russian traders and soldiers began to appear on the northwestern
+						edge of Kazakh territory in the 17th century, when Cossacks
+						established the forts that later became the cities of Oral (Ural'sk)
+						and Atyrau (Gur'yev). Russians were able to seize Kazakh territory
+						because the khanates were preoccupied by Kalmyks (Oirats, Dzungars),
+						who in the late 16th century had begun to move into Kazakh territory
+						from the east. Forced westward in what they call their Great
+						Retreat, the Kazakhs were increasingly caught between the Kalmyks
+						and the Russians. Two of the Kazakh Jüzes were dependant on Oirat
+						Huntaiji.
+					</p>
+					<img src="uploads/cossacks.jpg" alt="cossacks" width="100%" />
+				</div>
+				<div class="tab-pane container fade" id="invasionOfTheEmpire">
+					<p>
+						In 1730 Abul Khayr, one of the khans of the Junior Jüz, sought
+						Russian assistance. Although Abul Khayr's intent had been to form a
+						temporary alliance against the stronger Kalmyks, the Russians gained
+						permanent control of the Junior Jüz as a result of his decision.
+						Shortly thereafter the Middle Jüz's Khan Semeke agreed to suzerainty
+						under the same terms. Neither khan remained very loyal to the
+						Russians, but from this point Russian sovereigns began to assert the
+						right to appoint the khans of the Junior and Middle Jüzes and to
+						exert greater influence on them. The Kazakhs in turn began to view
+						the khanate with greater suspicion, as khans increasingly sought
+						Russian help against their rivals within the Khanate. Although the
+						Khanate recovered a degree of independence under Ablai from
+						1750-1778, his son failed to unite even the Middle Jüz, and in 1798,
+						the Russians attempted direct rule over the Middle Jüz, establishing
+						a tribunal at Petropavlovsk. In 1824, the Russians abolished the
+						khanate of the Middle Jüz. The Senior Jüz managed to remain
+						independent until the 1820s, when the expanding Kokand Khanate to
+						the south forced the Senior Jüz khans to choose Russian protection,
+						which seemed to be the lesser of two evils.
+					</p>
+					<img
+						src="uploads/soldiers in russian empire.jpg"
+						alt="soldiers in russian empire"
+						width="100%"
+					/>
+				</div>
+				<div class="tab-pane container fade" id="consequences">
+					<p>
+						The conquest of Kazakhstan by Russia was slowed by numerous
+						uprisings and wars in the 19th century. For example, uprisings of
+						Isatay Taymanuly and Makhambet Utemisuly in 1836–1838 and the war
+						led by Eset Kotibaruli in 1847–1858 were some of such events of
+						anti-colonial resistance.
+					</p>
+					<p>
+						In 1863 Russian Empire elaborated a new imperial policy, announced
+						in the Gorchakov Circular, asserting the right to annex
+						"troublesome" areas on the empire's borders. This policy led
+						immediately to the Russian conquest of the rest of Central Asia and
+						the creation of two administrative districts, the
+						General-Gubernatorstvo (Governor-Generalship) of Russian Turkestan
+						and that of the Steppe. Most of present-day Kazakhstan was in the
+						Steppe District, and parts of present-day southern Kazakhstan,
+						including Almaty (Verny), were in the Governor-Generalship.
+					</p>
+					<div class="row">
+						<div class="col-md-4">
+							<img
+								src="uploads/Isatay Taymanuly.png"
+								alt="Isatay Taymanuly"
+								width="100%"
+								height="400px"
+							/>
+						</div>
+						<div class="col-md-5">
+							<img
+								src="uploads/Makhambet Utemisuly.jpg"
+								alt="Makhambet Utemisuly"
+								width="100%"
+								height="400px"
+							/>
+						</div>
+						<div class="col-md-3">
+							<img
+								src="uploads/Eset Kotibaruli.jpg"
+								alt="Eset Kotibaruli"
+								width="100%"
+								height="400px"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				style="
+					width: 100%;
+					margin-bottom: 100px;
+					margin-top: 100px;
+					text-align: center;
+				"
+			>
+				<h3>
+					Significant events and transformations during the Russian Empire era
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Incorporation into the Russian Empire</p>
+						<div class="overlay third">
+							<div class="text">
+								The process of incorporating the Kazakh territories into the
+								Russian Empire began in the 18th century. The Treaty of Uliassar
+								in 1731 formalized the suzerainty of the Russian Empire over the
+								Kazakh Khanate.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Russian Expansion</p>
+						<div class="overlay third">
+							<div class="text">
+								Russian expansion into Central Asia continued throughout the
+								19th century. The Russian government aimed to control and
+								integrate the vast steppes of Kazakhstan, which were
+								strategically important for trade and security.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Abolition of the Kazakh Khanate</p>
+						<div class="overlay third">
+							<div class="text">
+								In 1847, the Russian Empire officially abolished the Kazakh
+								Khanate. This marked the end of the traditional Kazakh political
+								structure, and the region came under direct imperial
+								administration.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Land Reforms</p>
+						<div class="overlay third">
+							<div class="text">
+								The Russian government introduced land reforms in Kazakhstan,
+								including the establishment of a new system of landownership.
+								This had significant consequences for the nomadic way of life of
+								the Kazakh people.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Settlement Policies</p>
+						<div class="overlay third">
+							<div class="text">
+								To strengthen control and promote economic development, the
+								Russian Empire implemented settlement policies in Kazakhstan.
+								Russian and Ukrainian settlers were encouraged to move to the
+								region, leading to demographic changes.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="myCard">
+						<p>Railway Construction</p>
+						<div class="overlay third">
+							<div class="text">
+								The construction of the Trans-Aral Railway in the late 19th and
+								early 20th centuries connected Central Asia, including
+								Kazakhstan, to the broader Russian Empire. This had economic
+								implications, facilitating trade and transportation.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container d-flex justify-content-between mt-5">
+				<a href="/kazakhKhanate" class="btn btn-outline-primary"
+					><i class="fa fa-solid fa-arrow-left"></i> previous</a
+				>
+				<a href="/partOfUSSR" class="btn btn-outline-primary"
+					>next <i class="fa fa-solid fa-arrow-right"></i
+				></a>
+			</div>
+		</section>
+		<footer class="bg-body-secondary pt-5 pb-5" id="contact">
+			<div class="container">
+				<div class="row">
+					<ul class="col-lg-4 nav flex-column">
+						<li class="nav-item">
+							<a href="index.html" class="nav-link">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="kazakhKhanate.html" class="nav-link">Kazakh Khanate</a>
+						</li>
+						<li class="nav-item">
+							<a href="inRussianEmpire.html" class="nav-link active"
+								>In Russian Empire</a
+							>
+						</li>
+						<li class="nav-item">
+							<a href="partOfUSSR.html" class="nav-link">The Part of USSR</a>
+						</li>
+						<li class="nav-item">
+							<a href="quiz.html" class="nav-link">Quiz</a>
+						</li>
+					</ul>
+					<div class="col-lg-2 flex-column"></div>
+					<div class="col-lg-6 flex-column">
+						<a href="#" class="fa fa-facebook fa-lg"></a>
+						<a href="#" class="fa fa-twitter fa-lg"></a>
+						<a href="#" class="fa fa-instagram fa-lg"></a>
+						<a href="#" class="fa fa-reddit fa-lg"></a>
+						<h3 class="mt-5">References:</h3>
+						<ul>
+							<li>
+								<a href="https://en.wikipedia.org/wiki/Kazakhstan"
+									>https://en.wikipedia.org/wiki/Kazakhstan</a
+								>
+							</li>
+							<li>
+								<a href="https://aboutkazakhstan.com/about-kazakhstan-history"
+									>https://aboutkazakhstan.com/about-kazakhstan-history</a
+								>
+							</li>
+							<li>
+								<a href="https://invest.gov.kz/ru/about-kazakhstan/info/"
+									>https://invest.gov.kz/ru/about-kazakhstan/info/</a
+								>
+							</li>
+							<li>
+								<a href="https://en.wikipedia.org/wiki/Kazakh_Khanate"
+									>https://en.wikipedia.org/wiki/Kazakh_Khanate</a
+								>
+							</li>
+							<li>
+								<a
+									href="https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire"
+									>https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire</a
+								>
+							</li>
+							<li>
+								<a
+									href="https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic"
+									>https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

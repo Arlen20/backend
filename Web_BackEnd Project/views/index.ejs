@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>History of Kazakhstan</title>
+    <link rel="stylesheet" href="/index.css">
+   
+</head> 
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg bg-body-secondary">
+        <div class="container">
+            <a class="navbar-brand" href="/">History of Kazakhstan</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <div></div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown">content</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/kazakhKhanate">Kazakh Khanate</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/inRussianEmpire">In Russian Empire</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/partOfUSSR">The Part of USSR</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/quiz">quiz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/quiz">questions</a>
+                        </li>     
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">contacts</a>
+                        </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown">APIs</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="/stockMarketAPI">Stock Market API</a></li>
+                          <li><a class="dropdown-item" href="/newsapi">AI Assistant</a></li>
+                        </ul>
+                    </li>
+                    <% if (isAdmin) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin">admin</a>
+                        </li>
+                    <% } %>
+                </ul>
+                <ul class="navbar-nav">
+                    <% if (loggedIn) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/account"><%= user.username %></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">logout</a>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/login">login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/register">registration</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="title">
+            <h3>Kazakhstan is a country with a rich historical past, a multinational secular state, home to about 130 nationalities.</h3>
+        </div>
+        <section>
+        <div class="container">
+            <div class="aboutModernKaz">
+                <h2 class="mb-3">Modern Kazakhstan</h2>
+                <p>
+                    The Republic of Kazakhstan is a landlocked country mostly in Central Asia, with a small part in Europe. 
+                    It borders Russia to the north and west, China to the east, Kyrgyzstan to the southeast, Uzbekistan to 
+                    the south, and Turkmenistan to the southwest, with a coastline along the Caspian Sea. Its capital is Astana. 
+                    Kazakhstan is the world's ninth-largest country by land area and the largest landlocked country in the 
+                    world. It has a population of 19 million people. Kazakhstan has a GDP of $179.332 billion and an annual 
+                    growth rate of 4.5 percent. Per capita, Kazakhstan's GDP stands at $9,686. Ethnic Kazakhs constitute a 
+                    majority of the population, while ethnic Russians form a significant minority. Officially secular, Kazakhstan 
+                    is a Muslim-majority country, although ethnic Russians in the country form a sizeable Christian community.
+                </p>
+            </div>
+            <img src="uploads/kazakhstanMap.jpg" alt="Kazakhstan Map">
+            <div class="clean"></div>
+        </div>
+    </section>
+    <div class="mySectionImg"></div>
+    <section>
+        <div class="container">
+            <div class="row images">
+                <div class="col-xl-4 col-lg-6 mb-3"><img src="uploads/mainImage1.jpg" alt="Kazakh warriors"></div>
+                <div class="col-xl-4 col-lg-6 mb-3"><img src="uploads/mainImage2.jpeg" alt="Kazakhs under the Russian Empire"></div>
+                <div class="col-xl-4 col-lg-6 mb-3"><img src="uploads/mainImage3.jpg" alt="World War 2"></div>                
+            </div>
+            <script src="media/index.js"></script>
+            <div class="clean"></div>
+            <h2>Period of History of Kazakhstan</h2>
+            <div class="row mt-5">
+                <div class="col-lg-4 mb-3">
+                    <div class="card myCard">
+                        <a href="/kazakhKhanate">
+                            <img class="card-img-top" src="uploads/Kazakh Khanate.jfif" alt="Kazakh Khanate">
+                            <div class="overlay first">
+                                <div class="text">Kazakh Khanate<br>(1465 - 1847 yy.)</div>
+                            </div>
+                        </a>
+                        <div class="card-footer text-center">
+                            <h6>Kazakh Khanate</h6>
+                            <p>1465 - 1847 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card myCard">
+                        <a href="/inRussianEmpire">
+                            <img class="card-img-top" src="uploads/In Russian Empire.jpg" alt="In Russian Empire">
+                            <div class="overlay second">
+                                <div class="text">In Russian Empire<br>(1847 - 1922 yy.)</div>
+                            </div>
+                        </a>
+                        <div class="card-footer text-center">
+                            <h6>In Russian Empire</h6>
+                            <p>1847 - 1922 years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card myCard">
+                        <a href="/partOfUSSR">
+                            <img class="card-img-top" src="uploads/The Part of USSR.jfif" alt="The Part of USSR">
+                            <div class="overlay third">
+                                <div class="text">The Part of USSR <br>(1922 - 1991 yy.)</div>
+                            </div>
+                        </a>
+                        <div class="card-footer text-center">
+                            <h6>The Part of USSR</h6>
+                            <p>1922 - 1991 years</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+        <div class="content">
+            <% landmarks.forEach(landmark => { %>
+                <div class="landmark-item">
+                    <h4><%= landmark.title %></h4>
+                    <p><%= landmark.description %></p>
+                    <div id="carouselExample<%= landmark._id %>" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <% landmark.pictures.forEach((picture, index) => { %>
+                                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                    <img src="<%= picture %>" class="d-block w-100" alt="<%= landmark.title %>">
+                                </div>
+                            <% }) %>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample<%= landmark._id %>" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample<%= landmark._id %>" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p>Updated Date: <%= landmark.updatedDate %></p>
+                </div>
+            <% }) %>
+        </div>
+        </div>
+    </div>
+    <footer class="bg-body-secondary pt-5 pb-5" id="contact">
+        <div class="container">
+            <div class="row">
+                <ul class="col-lg-4 nav flex-column">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/kazakhKhanate" class="nav-link">Kazakh Khanate</a></li>
+                    <li class="nav-item"><a href="/inRussianEmpire" class="nav-link active">In Russian Empire</a></li>
+                    <li class="nav-item"><a href="/partOfUSSR" class="nav-link">The Part of USSR</a></li>
+                    <li class="nav-item"><a href="/quiz" class="nav-link">Quiz</a></li>
+                </ul>
+                <div class="col-lg-2 flex-column">
+                    
+                </div>
+                <div class="col-lg-6 flex-column">
+                    <a href="#" class="fa fa-facebook fa-lg"></a>
+                    <a href="#" class="fa fa-twitter fa-lg"></a>
+                    <a href="#" class="fa fa-instagram fa-lg"></a>
+                    <a href="#" class="fa fa-reddit fa-lg"></a>
+                    <h3 class="mt-5">References:</h3>
+                    <ul>
+                        <li><a href="https://en.wikipedia.org/wiki/Kazakhstan">https://en.wikipedia.org/wiki/Kazakhstan</a></li>
+                        <li><a href="https://aboutkazakhstan.com/about-kazakhstan-history">https://aboutkazakhstan.com/about-kazakhstan-history</a></li>
+                        <li><a href="https://invest.gov.kz/ru/about-kazakhstan/info/">https://invest.gov.kz/ru/about-kazakhstan/info/</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Kazakh_Khanate">https://en.wikipedia.org/wiki/Kazakh_Khanate</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire">https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic">https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

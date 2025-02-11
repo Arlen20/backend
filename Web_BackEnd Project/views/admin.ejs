@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Page</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<style>
+			#messageBox {
+				position: fixed;
+				top: 5px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 300px;
+				padding: 10px;
+				text-align: center;
+				z-index: 9999;
+			}
+			body {
+				font-family: Arial, sans-serif;
+			}
+			form {
+				margin-bottom: 20px;
+			}
+			label {
+				display: block;
+				margin: 10px 0 5px;
+			}
+			input,
+			select,
+			button {
+				padding: 5px;
+				margin-bottom: 10px;
+				width: 200px;
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 10px;
+				text-align: left;
+			}
+			th {
+				background-color: #f4f4f4;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="messageBox"></div>
+		<nav class="navbar fixed-top navbar-expand-lg bg-body-secondary mb-5">
+			<div class="container">
+				<a class="navbar-brand" href="/">Landmarks</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div
+					class="collapse navbar-collapse justify-content-between"
+					id="navbarNav"
+				>
+					<div></div>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/">home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a
+								class="nav-link dropdown-toggle"
+								href=""
+								data-bs-toggle="dropdown"
+								>APIs</a
+							>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="/stockmarketapi"
+										>Stock Market</a
+									>
+								</li>
+								<li><a class="dropdown-item" href="/newsapi">US News</a></li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="/admin">admin</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/account"><%= user.username %></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/auth/logout">logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container" style="margin-top: 80px">
+			<h1 class="mb-4">Admin Page</h1>
+
+			<h1>Admin User Management</h1>
+
+			<h2>Send Email</h2>
+			<form id="emailForm">
+				<label for="to">To:</label>
+				<input type="email" id="to" placeholder="Recipient's Email" required />
+
+				<label for="subject">Subject:</label>
+				<input type="text" id="subject" placeholder="Email Subject" required />
+
+				<label for="body">Body:</label>
+				<textarea id="body" placeholder="Email Content" required></textarea>
+
+				<label for="attachment">Attachment:</label>
+				<input type="file" id="attachment" />
+
+				<button type="button" onclick="sendEmail()">Send Email</button>
+			</form>
+
+			<!-- Filter and Sort Form -->
+			<form id="userForm">
+				<label for="filter">Search by Name/Username:</label>
+				<input type="text" id="filter" placeholder="Enter name or username" />
+
+				<label for="sort_by">Sort By:</label>
+				<select id="sort_by">
+					<option value="firstName">First Name</option>
+					<option value="lastName">Last Name</option>
+					<option value="username">Username</option>
+					<option value="email">Email</option>
+					<option value="age">Age</option>
+				</select>
+
+				<label for="sort_order">Sort Order:</label>
+				<select id="sort_order">
+					<option value="asc">Ascending</option>
+					<option value="desc">Descending</option>
+				</select>
+
+				<label for="page">Page:</label>
+				<input type="number" id="page" value="1" min="1" />
+
+				<label for="limit">Items per Page:</label>
+				<input type="number" id="limit" value="5" min="1" />
+
+				<button type="button" onclick="fetchUsers()">Search</button>
+			</form>
+
+			<!-- User Table -->
+			<table>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Username</th>
+						<th>Email</th>
+						<th>Age</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody id="usersTable">
+					<tr>
+						<td colspan="6" style="text-align: center">No users found</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Create Landmark Form -->
+			<form id="createForm" class="mb-4">
+				<h2>Create Landmark</h2>
+				<div class="form-group mb-2">
+					<label for="ctitle">Title:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="ctitle"
+						name="title"
+						required
+					/>
+				</div>
+				<div class="form-group mb-2">
+					<label for="cdescription">Description:</label>
+					<textarea
+						class="form-control"
+						id="cdescription"
+						name="description"
+						rows="5"
+						required
+					></textarea>
+				</div>
+				<div class="form-group mb-2">
+					<label for="cpictures">Pictures (up to 3):</label>
+					<input
+						type="file"
+						class="form-control-file"
+						id="cpictures"
+						name="pictures"
+						accept="image/*"
+						multiple
+						required
+					/>
+				</div>
+				<button
+					type="button"
+					class="btn btn-primary"
+					onclick="createLandmark()"
+				>
+					Create Landmark
+				</button>
+				<div id="cresult" class="mt-2"></div>
+			</form>
+
+			<!-- Read Landmark Form -->
+			<form id="readForm" class="mb-4">
+				<h2>Read Landmark</h2>
+				<div class="form-group mb-2">
+					<label for="readId">Enter Landmark ID:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="readId"
+						name="id"
+						required
+					/>
+				</div>
+				<button type="button" class="btn btn-primary" onclick="readLandmark()">
+					Read Landmark
+				</button>
+				<div id="readResult" class="mt-2" style="width: 50%"></div>
+			</form>
+
+			<!-- Update Landmark Form -->
+			<form id="updateForm" class="mb-4">
+				<h2>Update Landmark</h2>
+				<div class="form-group mb-2">
+					<label for="updateId">Enter Landmark ID:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="updateId"
+						name="id"
+						required
+					/>
+				</div>
+				<div class="form-group mb-2">
+					<label for="updateTitle">Title:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="updateTitle"
+						name="title"
+					/>
+				</div>
+				<div class="form-group mb-2">
+					<label for="updateDescription">Description:</label>
+					<textarea
+						class="form-control"
+						id="updateDescription"
+						name="description"
+						rows="5"
+					></textarea>
+				</div>
+				<div class="form-group mb-2">
+					<label for="updatePictures">Pictures (up to 3):</label>
+					<input
+						type="file"
+						class="form-control-file"
+						id="updatePictures"
+						name="pictures"
+						accept="image/*"
+						multiple
+					/>
+				</div>
+				<button
+					type="button"
+					class="btn btn-primary"
+					onclick="updateLandmark()"
+				>
+					Create Landmark
+				</button>
+				<div id="uresult" class="mt-2"></div>
+			</form>
+
+			<!-- Delete Landmark Form -->
+			<form id="deleteLandmarkForm" class="mb-4">
+				<h2>Delete Landmark</h2>
+				<div class="form-group mb-2">
+					<label for="did">Enter Landmark ID:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="deleteId"
+						name="id"
+						required
+					/>
+					<button
+						type="button"
+						class="btn btn-primary"
+						onclick="deleteLandmark()"
+					>
+						Read Landmark
+					</button>
+				</div>
+			</form>
+
+			<!-- Fetch All Landmarks Form -->
+			<form id="fetchAllLandmarksForm">
+				<h2>Fetch All Landmarks</h2>
+				<button
+					type="button"
+					class="btn btn-primary"
+					onclick="fetchAllLandmarks()"
+				>
+					Read Landmark
+				</button>
+				<div id="fetchAllResult" class="mt-2" style="width: 50%"></div>
+			</form>
+
+			<h2>Create Quiz Question</h2>
+			<form id="createQuizQuestionForm">
+				<label for="question">Question:</label>
+				<input type="text" id="question" name="question" required />
+
+				<label for="options">Options (comma separated):</label>
+				<input type="text" id="options" name="options" required />
+
+				<label for="correctAnswer">Correct Answer (comma separated):</label>
+				<input type="text" id="correctAnswer" name="correctAnswer" required />
+
+				<button type="button" onclick="createQuizQuestion()">
+					Create Quiz Question
+				</button>
+			</form>
+
+			<h2>Read Quiz Question</h2>
+			<form id="readQuizQuestionForm">
+				<label for="readQuizQuestionId">Enter Quiz Question ID:</label>
+				<input type="text" id="readQuizQuestionId" required />
+				<button type="button" onclick="readQuizQuestion()">
+					Read Quiz Question
+				</button>
+				<div id="readQuizQuestionResult" class="mt-2"></div>
+			</form>
+
+			<h2>Update Quiz Question</h2>
+			<form id="updateQuizQuestionForm">
+				<label for="updateQuizQuestionId">Enter Quiz Question ID:</label>
+				<input type="text" id="updateQuizQuestionId" required />
+
+				<label for="updateQuestion">Question:</label>
+				<input type="text" id="updateQuestion" />
+
+				<label for="updateOptions">Options (comma separated):</label>
+				<input type="text" id="updateOptions" />
+
+				<label for="updateCorrectAnswer"
+					>Correct Answer (comma separated):</label
+				>
+				<input type="text" id="updateCorrectAnswer" />
+
+				<button type="button" onclick="updateQuizQuestion()">
+					Update Quiz Question
+				</button>
+			</form>
+
+			<h2>Delete Quiz Question</h2>
+			<form id="deleteQuizQuestionForm">
+				<label for="deleteQuizQuestionId">Enter Quiz Question ID:</label>
+				<input type="text" id="deleteQuizQuestionId" required />
+				<button type="button" onclick="deleteQuizQuestion()">
+					Delete Quiz Question
+				</button>
+			</form>
+
+			<h2>Fetch All Quiz Questions</h2>
+			<button type="button" onclick="fetchAllQuizQuestions()">
+				Fetch All Quiz Questions
+			</button>
+			<div id="fetchAllQuizQuestionsResult" class="mt-2"></div>
+		</div>
+
+		<!-- JavaScript file for CRUD functionality -->
+		<script>
+			async function fetchUsers() {
+				// Get input values
+				const filter = document.getElementById('filter').value
+				const sortBy = document.getElementById('sort_by').value
+				const sortOrder = document.getElementById('sort_order').value
+				const page = document.getElementById('page').value
+				const limit = document.getElementById('limit').value
+
+				// Build query URL
+				const url = `http://localhost:8080/users?page=${page}&limit=${limit}&filter=${filter}&sort_by=${sortBy}&sort_order=${sortOrder}`
+
+				try {
+					const response = await fetch(url)
+					const users = await response.json()
+
+					// Populate table
+					const tableBody = document.getElementById('usersTable')
+					tableBody.innerHTML = '' // Clear the table
+
+					if (users.length > 0) {
+						users.forEach(user => {
+							const row = `<tr>
+			           <td>${user.firstName || 'N/A'}</td>
+			           <td>${user.lastName || 'N/A'}</td>
+			           <td>${user.username || 'N/A'}</td>
+			           <td>${user.email || 'N/A'}</td>
+			           <td>${user.age || 'N/A'}</td>
+			           <td>${user.role || 'N/A'}</td>
+			         </tr>`
+							tableBody.innerHTML += row
+						})
+					} else {
+						tableBody.innerHTML = `<tr>
+			         <td colspan="6" style="text-align: center;">No users found</td>
+			       </tr>`
+					}
+				} catch (error) {
+					console.error('Error fetching users:', error)
+					alert('An error occurred while fetching users.')
+				}
+			}
+
+			// Initial fetch when the page loads
+			fetchUsers()
+
+			function createLandmark() {
+				const title = document.getElementById('ctitle').value.trim()
+				const description = document.getElementById('cdescription').value.trim()
+				const pictures = document.getElementById('cpictures').files
+
+				if (title === '' || description === '' || pictures.length === 0) {
+					displayMessage('error', 'Please fill in all fields.')
+					return
+				}
+
+				const formData = new FormData()
+				formData.append('title', title)
+				formData.append('description', description)
+				for (let i = 0; i < pictures.length; i++) {
+					formData.append('pictures', pictures[i])
+				}
+
+				fetch('/landmarks', {
+					method: 'POST',
+					body: formData,
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Failed to create blog post.')
+						}
+						return response.json()
+					})
+					.then(data => {
+						console.log('New blog post created:', data)
+						displayMessage('success', 'Blog post created successfully.')
+					})
+					.catch(error => {
+						console.error('Error creating blog post:', error)
+						displayMessage(
+							'error',
+							'Failed to create blog post. Please try again later.'
+						)
+					})
+			}
+
+			function readLandmark() {
+				const blogId = document.getElementById('readId').value.trim()
+				if (blogId === '') {
+					displayMessage('error', 'Please fill in the field.')
+					return
+				}
+				fetch(`/landmarks/${blogId}`)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Failed to fetch blog post.')
+						}
+						return response.json()
+					})
+					.then(data => {
+						displayLandmark(data, 'readResult')
+					})
+					.catch(error => {
+						console.error('Error: landmark is not found.', error)
+						displayMessage('error', 'Landmark is not found.')
+					})
+			}
+
+			function updateLandmark() {
+				const id = document.getElementById('updateId').value.trim()
+				const title = document.getElementById('updateTitle').value.trim()
+				const description = document
+					.getElementById('updateDescription')
+					.value.trim()
+				const pictures = document.getElementById('updatePictures').files
+
+				const data = {}
+
+				if (title !== '') {
+					data.title = title
+				}
+				if (description !== '') {
+					data.description = description
+				}
+
+				if (pictures.length > 0) {
+					data.pictures = pictures
+				}
+
+				fetch(`/landmarks/${id}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Failed to update landmark.')
+						}
+						return response.json()
+					})
+					.then(data => {
+						console.log('Landmark updated:', data)
+						displayMessage('success', 'Landmark updated successfully.')
+					})
+					.catch(error => {
+						console.error('Error updating landmark:', error)
+						displayMessage(
+							'error',
+							'Failed to update landmark. Please try again later.'
+						)
+					})
+			}
+
+			function deleteLandmark() {
+				const id = document.getElementById('deleteId').value.trim()
+				fetch(`/landmarks/${id}`, {
+					method: 'DELETE',
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Failed to delete landmark.')
+						}
+						return response.json()
+					})
+					.then(data => {
+						console.log('Landmark deleted:', data)
+						displayMessage('success', 'Landmark deleted successfully.')
+					})
+					.catch(error => {
+						console.error('Error deleting landmark:', error)
+						displayMessage(
+							'error',
+							'Failed to delete landmark. Please try again later.'
+						)
+					})
+			}
+
+			function fetchAllLandmarks() {
+				fetch('/landmarks')
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Failed to fetch landmarks.')
+						}
+						return response.json()
+					})
+					.then(data => {
+						const fetchAllResult = document.getElementById('fetchAllResult')
+						fetchAllResult.innerHTML = ''
+
+						for (let i = 0; i < data.length; i++) {}
+
+						let i = 0
+						data.forEach(post => {
+							const postDiv = document.createElement('div')
+							postDiv.id = `fetchAllResultChild${i}`
+							fetchAllResult.appendChild(postDiv)
+							postDiv.classList.add('mb-4')
+							displayLandmark(post, postDiv.id)
+							i++
+						})
+					})
+					.catch(error => {
+						console.error('Error fetching landmarks:', error)
+						displayMessage(
+							'error',
+							'Failed to fetch all landmarks. Please try again later.'
+						)
+					})
+			}
+
+			let carouselId = 1
+			function displayLandmark(data, targetElementId) {
+				const targetElement = document.getElementById(targetElementId)
+				targetElement.innerHTML = ''
+
+				let carouselHTML = `
+        <div id="carouselExampleIndicators${carouselId}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+    `
+
+				data.pictures.slice(0, 3).forEach((picture, index) => {
+					carouselHTML += `
+            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img src="${picture.substring(
+									6
+								)}" class="d-block w-100" alt="...">
+            </div>
+        `
+				})
+
+				carouselHTML += `
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators${carouselId}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators${carouselId}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    `
+
+				targetElement.innerHTML = carouselHTML
+
+				const titleElement = document.createElement('h3')
+				titleElement.textContent = data.title
+
+				const descriptionElement = document.createElement('p')
+				descriptionElement.textContent = data.description
+
+				const publishedDateElement = document.createElement('p')
+				const publishedDate = new Date(data.publishedDate)
+				publishedDateElement.textContent =
+					'Posted on: ' + publishedDate.toLocaleString()
+
+				const updatedDateElement = document.createElement('p')
+				const updatedDate = new Date(data.updatedDate)
+				updatedDateElement.textContent =
+					'Updated on: ' + updatedDate.toLocaleString()
+
+				targetElement.appendChild(titleElement)
+				targetElement.appendChild(descriptionElement)
+				targetElement.appendChild(publishedDateElement)
+				targetElement.appendChild(updatedDateElement)
+				carouselId++
+			}
+
+			function displayMessage(type, message) {
+				const messageBox = document.getElementById('messageBox')
+				messageBox.textContent = message
+				messageBox.classList.remove('alert-success', 'alert-danger')
+				if (type === 'success') {
+					messageBox.classList.add('alert', 'alert-success')
+				} else if (type === 'error') {
+					messageBox.classList.add('alert', 'alert-danger')
+				}
+
+				setTimeout(() => {
+					messageBox.textContent = ''
+					messageBox.classList.remove('alert-success', 'alert-danger')
+				}, 4000)
+			}
+			async function sendEmail() {
+				const to = document.getElementById('to').value
+				const subject = document.getElementById('subject').value
+				const body = document.getElementById('body').value
+				const attachment = document.getElementById('attachment').files[0]
+
+				const formData = new FormData()
+				formData.append('to', to)
+				formData.append('subject', subject)
+				formData.append('body', body)
+
+				if (attachment) {
+					formData.append('attachment', attachment)
+				}
+
+				try {
+					const response = await fetch('http://localhost:8080/send-email', {
+						method: 'POST',
+						body: formData,
+					})
+
+					if (response.ok) {
+						alert('Email sent successfully!')
+					} else {
+						alert('Failed to send email.')
+					}
+				} catch (error) {
+					console.error('Error sending email:', error)
+					alert('An error occurred while sending the email.')
+				}
+			}
+			async function createQuizQuestion() {
+				const question = document.getElementById('question').value.trim()
+				const options = document
+					.getElementById('options')
+					.value.trim()
+					.split(',')
+				const correctAnswer = document
+					.getElementById('correctAnswer')
+					.value.trim()
+					.split(',')
+
+				const data = { question, options, correctAnswer }
+
+				try {
+					const response = await fetch('/quiz-questions', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data),
+					})
+
+					if (!response.ok) {
+						throw new Error('Failed to create quiz question.')
+					}
+
+					const result = await response.json()
+					displayMessage('success', 'Quiz question created successfully.')
+					console.log('Quiz question created:', result)
+				} catch (error) {
+					console.error('Error creating quiz question:', error)
+					displayMessage(
+						'error',
+						'Failed to create quiz question. Please try again later.'
+					)
+				}
+			}
+
+			async function readQuizQuestion() {
+				const id = document.getElementById('readQuizQuestionId').value.trim()
+
+				try {
+					const response = await fetch(`/quiz-questions/${id}`)
+
+					if (!response.ok) {
+						throw new Error('Failed to fetch quiz question.')
+					}
+
+					const result = await response.json()
+					displayQuizQuestion(result, 'readQuizQuestionResult')
+				} catch (error) {
+					console.error('Error fetching quiz question:', error)
+					displayMessage('error', 'Quiz question not found.')
+				}
+			}
+
+			async function updateQuizQuestion() {
+				const id = document.getElementById('updateQuizQuestionId').value.trim()
+				const question = document.getElementById('updateQuestion').value.trim()
+				const options = document
+					.getElementById('updateOptions')
+					.value.trim()
+					.split(',')
+				const correctAnswer = document
+					.getElementById('updateCorrectAnswer')
+					.value.trim()
+					.split(',')
+
+				const data = {}
+
+				if (question !== '') {
+					data.question = question
+				}
+				if (options.length > 0) {
+					data.options = options
+				}
+				if (correctAnswer.length > 0) {
+					data.correctAnswer = correctAnswer
+				}
+
+				try {
+					const response = await fetch(`/quiz-questions/${id}`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data),
+					})
+
+					if (!response.ok) {
+						throw new Error('Failed to update quiz question.')
+					}
+
+					const result = await response.json()
+					displayMessage('success', 'Quiz question updated successfully.')
+					console.log('Quiz question updated:', result)
+				} catch (error) {
+					console.error('Error updating quiz question:', error)
+					displayMessage(
+						'error',
+						'Failed to update quiz question. Please try again later.'
+					)
+				}
+			}
+
+			async function deleteQuizQuestion() {
+				const id = document.getElementById('deleteQuizQuestionId').value.trim()
+
+				try {
+					const response = await fetch(`/quiz-questions/${id}`, {
+						method: 'DELETE',
+					})
+
+					if (!response.ok) {
+						throw new Error('Failed to delete quiz question.')
+					}
+
+					const result = await response.json()
+					displayMessage('success', 'Quiz question deleted successfully.')
+					console.log('Quiz question deleted:', result)
+				} catch (error) {
+					console.error('Error deleting quiz question:', error)
+					displayMessage(
+						'error',
+						'Failed to delete quiz question. Please try again later.'
+					)
+				}
+			}
+
+			async function fetchAllQuizQuestions() {
+				try {
+					const response = await fetch('/quiz-questions')
+
+					if (!response.ok) {
+						throw new Error('Failed to fetch quiz questions.')
+					}
+
+					const result = await response.json()
+					const fetchAllResult = document.getElementById(
+						'fetchAllQuizQuestionsResult'
+					)
+					fetchAllResult.innerHTML = ''
+
+					result.forEach(quizQuestion => {
+						const quizQuestionDiv = document.createElement('div')
+						quizQuestionDiv.classList.add('mb-4')
+						displayQuizQuestion(quizQuestion, quizQuestionDiv)
+						fetchAllResult.appendChild(quizQuestionDiv)
+					})
+				} catch (error) {
+					console.error('Error fetching quiz questions:', error)
+					displayMessage(
+						'error',
+						'Failed to fetch quiz questions. Please try again later.'
+					)
+				}
+			}
+
+			function displayQuizQuestion(data, targetElement) {
+				targetElement.innerHTML = `
+								<h4>ID: ${data._id}</h4>
+                <h4>${data.question}</h4>
+                <p>Options: ${data.options.join(', ')}</p>
+                <p>Correct Answer: ${data.correctAnswer.join(', ')}</p>
+                <p>Created Date: ${new Date(
+									data.createdDate
+								).toLocaleString()}</p>
+                <p>Updated Date: ${new Date(
+									data.updatedDate
+								).toLocaleString()}</p>
+            `
+			}
+		</script>
+		<footer
+			style="
+				background-color: rgb(228, 228, 228);
+				padding: 50px;
+				margin-top: 200px;
+			"
+		>
+			<p>Student full name: Nurlybay Nurbol</p>
+			<p>Group: SE-2315</p>
+		</footer>
+	</body>
+</html>

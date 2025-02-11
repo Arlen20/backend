@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="kazakhKhanate.css" />
+		<link rel="icon" href="uploads/favicon.png" type="image/ico" />
+		<title>Kazakh Khanate</title>
+	</head>
+	<body>
+		<nav class="navbar fixed-top navbar-expand-lg bg-body-secondary">
+			<div class="container">
+				<a class="navbar-brand" href="/">History of Kazakhstan</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div
+					class="collapse navbar-collapse justify-content-between"
+					id="navbarNav"
+				>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link" href="/">home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a
+								class="nav-link dropdown-toggle"
+								href=""
+								data-bs-toggle="dropdown"
+								>content</a
+							>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item active" href="/kazakhKhanate"
+										>Kazakh Khanate</a
+									>
+								</li>
+								<li><hr class="dropdown-divider" /></li>
+								<li>
+									<a class="dropdown-item" href="/inRussianEmpire"
+										>In Russian Empire</a
+									>
+								</li>
+								<li><hr class="dropdown-divider" /></li>
+								<li>
+									<a class="dropdown-item" href="/partOfUSSR"
+										>The Part of USSR</a
+									>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/quiz">quiz</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#contact">contacts</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								data-bs-toggle="modal"
+								data-bs-target="#loginModal"
+								href="#"
+								>Login</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								data-bs-toggle="modal"
+								data-bs-target="#registerModal"
+								href="#"
+								>Registration</a
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="modal fade" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Login</h4>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+						></button>
+					</div>
+					<form>
+						<div class="modal-body">
+							<div class="form-floating mb-3 mt-3">
+								<input
+									type="text"
+									class="form-control"
+									id="email"
+									placeholder="Enter email"
+									name="email"
+								/>
+								<label for="email">Email</label>
+							</div>
+							<div class="form-floating mt-3 mb-3">
+								<input
+									type="text"
+									class="form-control"
+									id="pwd"
+									placeholder="Enter password"
+									name="pswd"
+								/>
+								<label for="pwd">Password</label>
+							</div>
+						</div>
+
+						<div class="d-flex modal-footer justify-content-between">
+							<input
+								type="submit"
+								class="form-control text-bg-primary"
+								value="login"
+								style="width: 80px"
+							/>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-dismiss="modal"
+							>
+								Close
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="registerModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Registration</h4>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+						></button>
+					</div>
+					<form>
+						<div class="modal-body">
+							<div class="input-group mb-3">
+								<span class="input-group-text">Person</span>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="First Name"
+								/>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Last Name"
+								/>
+							</div>
+							<div class="input-group mb-3">
+								<span class="input-group-text">@</span>
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Username"
+								/>
+							</div>
+							<div class="form-floating mb-3 mt-3">
+								<input
+									type="text"
+									class="form-control"
+									id="email"
+									placeholder="Enter email"
+									name="email"
+								/>
+								<label for="email">Email</label>
+							</div>
+							<div class="form-floating mt-3 mb-3">
+								<input
+									type="text"
+									class="form-control"
+									id="pwd"
+									placeholder="Enter password"
+									name="pswd"
+								/>
+								<label for="pwd">Password</label>
+							</div>
+						</div>
+
+						<div class="d-flex modal-footer justify-content-between">
+							<input
+								type="submit"
+								class="form-control text-bg-primary"
+								value="login"
+								style="width: 80px"
+							/>
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-dismiss="modal"
+							>
+								Close
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<section>
+			<div class="container">
+				<div style="width: 100%; text-align: center; margin-bottom: 100px">
+					<h2>Period of The Kazakh Khanate (1465 - 1847 yy.)</h2>
+				</div>
+				<div class="row mb-2">
+					<div class="col-lg-8 pe-5 pt-3">
+						<h3 class="mb-3">Kazakh Khanate</h3>
+						<p>
+							The Kazakh Khanate in eastern sources known as Ulus of the
+							Kazakhs, Ulus of Jochi, Yurt of Urus, was a Kazakh state in
+							Central Asia, successor of the Golden Horde existing from the 15th
+							to the 19th century, centered on the eastern parts of the Desht-i
+							Qipchaq. The khanate was established by Janibek Khan and Kerei
+							Khan in 1465.
+						</p>
+					</div>
+					<div class="col-lg-4">
+						<img
+							src="uploads/Kazakh Khanate2.jpg"
+							style="width: 100%"
+							alt="Kazakh warriors"
+						/>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col-lg-4">
+						<img
+							src="uploads/Kazakh Khanate3.jpg"
+							style="width: 100%"
+							alt="Kazakh Khanate illustration"
+						/>
+					</div>
+					<div class="col-lg-8 ps-5 pt-5">
+						<h2 class="mb-3">Formation</h2>
+						<p>
+							The formation of the Kazakh Khanate began in 1459, when several
+							Kazakh tribes dissatisfied with Abu’l-Khayr's rule, led by
+							great-grandson of Urus Khan, Janibek and Kerei, fled the Uzbek
+							Khanate in an event known as the Great Migration. The two cousins
+							led the nomads towards Moghulistan, eventually settling and
+							establishing an independent state. The Khan of Moghulistan united
+							with them, offering them support against their opponents. Around
+							200,000 nomads joined Janibek Khan and Kerei Khan's movement,
+							which had had a huge power and influence that it sparked fear in
+							Abu'l-Khayr. The new khanate soon became a buffer state between
+							the Moghulistan and the Uzbek Khanate.
+						</p>
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col-lg-8 pe-5 pt-5">
+						<h2 class="mb-3">Expansion of the Kazakh Khanate</h2>
+						<p>
+							Kasym, son of Janibek, became the Khan in 1511 and from that point
+							only the descendants of Janibek Khan ruled Kazakh khanate until
+							its fall. Under his rule, the Kazakh Khanate reached its greatest
+							strength so much that the Nogai Horde, which occupied the
+							territory of modern Western Kazakhstan, became its number one
+							enemy. Kasym successfully captured the Nogai capital Saray-Juk in
+							1520, pushing the Nogai Horde to the Astrakhan Khanate. Under
+							Kasym Khan, the borders of the Kazakh Khanate expanded, the
+							population reached 1 million people.
+						</p>
+					</div>
+					<div class="col-lg-4">
+						<img
+							src="uploads/Kazakh Khanate4.png"
+							style="width: 100%"
+							alt="Kazakh Khanate illustration"
+						/>
+					</div>
+				</div>
+				<div
+					style="
+						width: 100%;
+						text-align: center;
+						margin-bottom: 50px;
+						margin-top: 200px;
+					"
+				>
+					<h3>Kazakh Khans who ruled the three jüzs:</h3>
+				</div>
+				<table
+					class="table table-striped table-bordered table-hover table-info text-center"
+				>
+					<tr>
+						<th>Name</th>
+						<th>Ruling period</th>
+						<th>Name in Kazakh</th>
+					</tr>
+					<tr>
+						<td>Kerei Khan</td>
+						<td>1456–1473</td>
+						<td>Керей-хан, كيري</td>
+					</tr>
+					<tr>
+						<td>Janibek Khan</td>
+						<td>1473–1480</td>
+						<td>Жәнібек-хан, جانيبك</td>
+					</tr>
+					<tr>
+						<td>Burunduk Khan</td>
+						<td>1480–1511</td>
+						<td>Бұрындық-хан (Мұрындық), بوروندي</td>
+					</tr>
+					<tr>
+						<td>Qasim Khan</td>
+						<td>1511–1518</td>
+						<td>Қасым-хан, قاسم</td>
+					</tr>
+					<tr>
+						<td>Muhammed Khan</td>
+						<td>1518–1523</td>
+						<td>Мұхаммед-хан, محمد</td>
+					</tr>
+					<tr>
+						<td>Tahir Khan</td>
+						<td>1523–1533</td>
+						<td>Тахир-хан, طاهر</td>
+					</tr>
+					<tr>
+						<td>Buidash Khan</td>
+						<td>1533–1538</td>
+						<td>Бұйдаш-хан, بويداش</td>
+					</tr>
+					<tr>
+						<td>Ahmed Khan</td>
+						<td>1533–1535</td>
+						<td>Ахмед-хан, أحمد</td>
+					</tr>
+					<tr>
+						<td>Toghym Khan</td>
+						<td>1535–1537</td>
+						<td>Тоғым-хан, توغيم</td>
+					</tr>
+					<tr>
+						<td>Haqnazar Khan</td>
+						<td>1538–1580</td>
+						<td>Хақназар-хан, حقنازار</td>
+					</tr>
+					<tr>
+						<td>Shygai Khan</td>
+						<td>1580–1582</td>
+						<td>Шығай-хан, شیغی</td>
+					</tr>
+					<tr>
+						<td>Tauekel Khan</td>
+						<td>1582–1598</td>
+						<td>Тәуекел-хан, تاوکل</td>
+					</tr>
+					<tr>
+						<td>Esim Khan</td>
+						<td>1598–1628</td>
+						<td>Есім-хан, عاصم</td>
+					</tr>
+					<tr>
+						<td>Salqam Jangir Khan</td>
+						<td>1628–1652</td>
+						<td>Жәңгір-хан, جهانگیر</td>
+					</tr>
+					<tr>
+						<td>Bahadur Khan</td>
+						<td>1652–1680</td>
+						<td>Баһадүр, بهادور</td>
+					</tr>
+					<tr>
+						<td>Tauke Khan</td>
+						<td>1680–1715</td>
+						<td>Тәуке-хан, تاوكي</td>
+					</tr>
+					<tr>
+						<td>Qaiyp Khan</td>
+						<td>1715–1718</td>
+						<td>Қайып-хан, كايب</td>
+					</tr>
+					<tr>
+						<td>Bolat Khan</td>
+						<td>1718–1729</td>
+						<td>Болат-хан, بولات</td>
+					</tr>
+					<tr>
+						<td>Abulmambet Khan</td>
+						<td>1729–1771</td>
+						<td>Әбілмәмбет-хан, أبو المامبيت</td>
+					</tr>
+					<tr>
+						<td>Ablai Khan</td>
+						<td>1771–1781</td>
+						<td>Әбілмансұр, Абылай-хан أبو المنصور</td>
+					</tr>
+					<tr>
+						<td>Kenesary Khan</td>
+						<td>1841–1847</td>
+						<td>Кенесары, كينيساري</td>
+					</tr>
+				</table>
+			</div>
+			<i class="fa-solid fa-arrow-right"></i>
+			<div class="container d-flex justify-content-end">
+				<a href="inRussianEmpire" class="btn btn-outline-primary"
+					>next <i class="fa fa-solid fa-arrow-right"></i
+				></a>
+			</div>
+		</section>
+		<footer class="bg-body-secondary pt-5 pb-5" id="contact">
+			<div class="container">
+				<div class="row">
+					<ul class="col-lg-4 nav flex-column">
+						<li class="nav-item">
+							<a href="index.html" class="nav-link">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="kazakhKhanate.html" class="nav-link">Kazakh Khanate</a>
+						</li>
+						<li class="nav-item">
+							<a href="inRussianEmpire.html" class="nav-link active"
+								>In Russian Empire</a
+							>
+						</li>
+						<li class="nav-item">
+							<a href="partOfUSSR.html" class="nav-link">The Part of USSR</a>
+						</li>
+						<li class="nav-item">
+							<a href="quiz.html" class="nav-link">Quiz</a>
+						</li>
+					</ul>
+					<div class="col-lg-2 flex-column"></div>
+					<div class="col-lg-6 flex-column">
+						<a href="#" class="fa fa-facebook fa-lg"></a>
+						<a href="#" class="fa fa-twitter fa-lg"></a>
+						<a href="#" class="fa fa-instagram fa-lg"></a>
+						<a href="#" class="fa fa-reddit fa-lg"></a>
+						<h3 class="mt-5">References:</h3>
+						<ul>
+							<li>
+								<a href="https://en.wikipedia.org/wiki/Kazakhstan"
+									>https://en.wikipedia.org/wiki/Kazakhstan</a
+								>
+							</li>
+							<li>
+								<a href="https://aboutkazakhstan.com/about-kazakhstan-history"
+									>https://aboutkazakhstan.com/about-kazakhstan-history</a
+								>
+							</li>
+							<li>
+								<a href="https://invest.gov.kz/ru/about-kazakhstan/info/"
+									>https://invest.gov.kz/ru/about-kazakhstan/info/</a
+								>
+							</li>
+							<li>
+								<a href="https://en.wikipedia.org/wiki/Kazakh_Khanate"
+									>https://en.wikipedia.org/wiki/Kazakh_Khanate</a
+								>
+							</li>
+							<li>
+								<a
+									href="https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire"
+									>https://en.wikipedia.org/wiki/Kazakhstan_in_the_Russian_Empire</a
+								>
+							</li>
+							<li>
+								<a
+									href="https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic"
+									>https://en.wikipedia.org/wiki/Kazakh_Soviet_Socialist_Republic</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
