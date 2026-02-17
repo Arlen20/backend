@@ -74,6 +74,8 @@ If any credentials were previously committed, they should be rotated immediately
  - go mod download
  - go run main.go
 
+<img width="1152" height="543" alt="image" src="https://github.com/user-attachments/assets/37df2579-9a63-4ec9-93e4-69a8f6f9bc34" />
+
 
 ## Expected ports (may vary by config):
 
