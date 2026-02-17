@@ -1,75 +1,102 @@
-# Web Backend Project with Clean Architecture
+# 🌐 Web Backend Project — Node.js Web App + Go Microservices (Experimental)
 
-Бэкенд проект, построенный с использованием принципов Clean Architecture.
+This repository contains a **hybrid backend project** with two separate implementations:
 
-## Структура проекта
+1) **Node.js + Express + EJS** — main web application (pages, auth, CRUD, API proxy endpoints).  
+2) **Go (HTTP + gRPC + NATS + Redis)** — experimental microservice-style backend (Clean Architecture structure).
 
-```
-├── cmd/                  # Точки входа в приложение
-│   └── api/              # HTTP API сервер
-│       └── main.go       # Основной файл запуска
-├── internal/             # Приватный код приложения
-│   ├── domain/           # Бизнес сущности и правила
-│   ├── usecase/          # Реализация бизнес логики (use cases)
-│   ├── repository/       # Реализация доступа к данным
-│   ├── service/          # Вспомогательные сервисы
-│   └── delivery/         # Обработчики запросов
-│       ├── http/         # HTTP обработчики
-│       └── grpc/         # gRPC обработчики
-├── pkg/                  # Публичные библиотеки
-│   ├── config/           # Конфигурация приложения
-│   └── database/         # Утилиты для работы с БД
-└── proto/                # Протото файлы для gRPC
-```
+> ✅ The Node.js application is the primary runnable part.  
+> ⚠️ The Go backend is an experimental distributed-systems implementation and is **not fully integrated** with the Node app yet.
 
-## Слои Clean Architecture
+---
 
-1. **Entities (Domain)** - бизнес объекты приложения, определенные в `internal/domain`.
-2. **Use Cases** - бизнес логика приложения в `internal/usecase`.
-3. **Interface Adapters** - адаптеры для интерфейсов различного типа:
-   - Репозитории (`internal/repository`) - адаптеры для БД
-   - Handlers (`internal/delivery`) - адаптеры для HTTP/gRPC
-4. **Frameworks & Drivers** - внешние фреймворки и инструменты:
-   - MongoDB - база данных
-   - gRPC - коммуникационный фреймворк
-   - Go Std HTTP - веб фреймворк
+## 🧩 Project Structure
 
-## Ключевые Принципы
+### Node.js (Web App)
+- `app.js` — main Express server, sessions, MongoDB connection, routes
+- `routes/` — route definitions (auth, main, landmarks, quiz, API proxy, transactions)
+- `controllers/` — business logic (auth, CRUD, external API calls)
+- `models/` — Mongoose schemas
+- `views/` — EJS templates (UI pages)
+- `public/` — static files (CSS/JS/uploads)
 
-1. **Dependency Rule** - внутренние слои не зависят от внешних.
-2. **Dependency Injection** - зависимости передаются извне.
-3. **Interface Segregation** - интерфейсы определены в слое, где они используются.
-4. **Single Responsibility** - каждый компонент имеет одну причину для изменения.
+### Go (Distributed Backend — Experimental)
+- `main.go` — HTTP server + gRPC startup
+- `internal/` — Clean Architecture layers (domain / usecase / repository / delivery)
+- `proto/`, `grpc/` — gRPC contracts and server implementations
+- `transaction/`, `quiz/` — service modules (microservice-like structure)
 
-## gRPC и его Преимущества
+---
 
-gRPC в этом проекте используется для:
+## ✨ Key Features (Implemented)
 
-1. **Микросервисная Коммуникация** - обеспечивает высокопроизводительное взаимодействие между сервисами.
-2. **Сильная Типизация** - контракты API определены через Protocol Buffers, что гарантирует типобезопасность.
-3. **Эффективная Сериализация** - Protocol Buffers обеспечивают компактное бинарное представление данных.
-4. **Двунаправленный Стриминг** - поддержка стриминга в обоих направлениях.
-5. **Кросс-платформенность** - легко используется с разными языками программирования.
+### ✅ Node.js Web App
+- Authentication + sessions
+- CRUD for main entities (e.g., landmarks / users / transactions)
+- Server-side rendering with EJS
+- API proxy endpoints to external services (news / stocks / etc.)
+- Quiz page and result storage (MongoDB)
 
-## NATS и Потенциальное Использование
+### ✅ Go Backend (Systems / Microservices Focus)
+- gRPC server (user CRUD style services)
+- NATS messaging integration
+- Redis caching layer (optional)
+- Multi-service style ports (HTTP + gRPC + service endpoints)
+- Clean Architecture structure for maintainability
 
-NATS может быть использован для:
+---
 
-1. **Асинхронной Коммуникации** - для обработки событий, которые не требуют немедленного ответа.
-2. **Публикация/Подписка** - для реализации паттерна издатель-подписчик между сервисами.
-3. **Распределенные Очереди** - для балансировки нагрузки между несколькими экземплярами.
-4. **Дискавери Сервисов** - для автоматического обнаружения сервисов.
-5. **Отказоустойчивость** - для временного хранения сообщений при недоступности получателей.
+## 🔒 Security Note (Important)
 
-## Запуск проекта
+This project uses environment variables for credentials and API keys.
 
-```bash
-# Установка зависимостей
-go mod download
+✅ The repository includes `env.example` (template).  
+❌ Do NOT commit real secrets (`.env` is ignored).
 
-# Генерация gRPC кода из proto файлов
-protoc --go_out=. --go-grpc_out=. proto/*.proto
+If any credentials were previously committed, they should be rotated immediately.
 
-# Запуск сервера
-go run cmd/api/main.go
-```
+---
+
+## ▶️ Run (Node.js — Main App)
+
+ - npm install
+ - npm run dev
+
+## Open:
+
+ - http://localhost:3000
+
+## 🧪 Go Backend (Optional / Experimental)
+
+ - Requires MongoDB and NATS running locally.
+ - This part is currently used as an architecture experiment.
+
+ - go mod download
+ - go run main.go
+
+
+## Expected ports (may vary by config):
+
+- HTTP: 8080
+
+- gRPC: 50051
+
+# other services: 8081, 8082
+
+## 📌 Future Improvements
+
+Integrate Node gateway with Go services via gRPC
+
+Remove hardcoded config and use .env everywhere
+
+Add Docker Compose for MongoDB + NATS + Redis
+
+Add tests (unit/integration)
+
+CI/CD pipeline (GitHub Actions)
+
+Centralized structured logging + metrics
+
+## 📄 License
+
+Educational / Demonstration project.
