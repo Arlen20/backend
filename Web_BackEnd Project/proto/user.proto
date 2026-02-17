@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "web_backend_project/proto";
+
+// Сервис для работы с пользователями
+service UserService {
+  // Получение списка пользователей
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse);
+  
+  // Получение пользователя по ID
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  
+  // Создание нового пользователя
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  
+  // Обновление существующего пользователя
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  
+  // Удаление пользователя
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+// Модель пользователя
+message User {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string username = 4;
+  string email = 5;
+}
+
+// Запрос на получение списка пользователей
+message GetUsersRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string filter = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+// Ответ со списком пользователей
+message GetUsersResponse {
+  repeated User users = 1;
+}
+
+// Запрос на получение пользователя по ID
+message GetUserRequest {
+  string id = 1;
+}
+
+// Ответ с данными пользователя
+message GetUserResponse {
+  User user = 1;
+}
+
+// Запрос на создание пользователя
+message CreateUserRequest {
+  User user = 1;
+}
+
+// Ответ после создания пользователя
+message CreateUserResponse {
+  string id = 1;
+}
+
+// Запрос на обновление пользователя
+message UpdateUserRequest {
+  User user = 1;
+}
+
+// Ответ после обновления пользователя
+message UpdateUserResponse {
+  bool success = 1;
+}
+
+// Запрос на удаление пользователя
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// Ответ после удаления пользователя
+message DeleteUserResponse {
+  bool success = 1;
+} 

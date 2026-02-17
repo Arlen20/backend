@@ -1,0 +1,278 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "Web_BackEnd Project/proto";
+
+// Quiz Service
+service QuizService {
+  rpc CreateQuiz(CreateQuizRequest) returns (QuizResponse);
+  rpc GetQuiz(GetQuizRequest) returns (QuizResponse);
+  rpc UpdateQuiz(UpdateQuizRequest) returns (QuizResponse);
+  rpc DeleteQuiz(DeleteQuizRequest) returns (DeleteQuizResponse);
+  rpc ListQuizzes(ListQuizzesRequest) returns (ListQuizzesResponse);
+}
+
+// Transaction Service
+service TransactionService {
+  rpc CreateTransaction(CreateTransactionRequest) returns (TransactionResponse);
+  rpc GetTransaction(GetTransactionRequest) returns (TransactionResponse);
+  rpc UpdateTransaction(UpdateTransactionRequest) returns (TransactionResponse);
+  rpc DeleteTransaction(DeleteTransactionRequest) returns (DeleteTransactionResponse);
+  rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsResponse);
+}
+
+// User Service
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (UserResponse);
+  rpc GetUser(GetUserRequest) returns (UserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc AuthenticateUser(AuthenticateUserRequest) returns (AuthenticateUserResponse);
+}
+
+// Notification Service
+service NotificationService {
+  rpc SendEmail(SendEmailRequest) returns (SendEmailResponse);
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+  rpc GetNotifications(GetNotificationsRequest) returns (GetNotificationsResponse);
+  rpc MarkNotificationAsRead(MarkNotificationAsReadRequest) returns (MarkNotificationAsReadResponse);
+  rpc DeleteNotification(DeleteNotificationRequest) returns (DeleteNotificationResponse);
+}
+
+// Quiz Messages
+message CreateQuizRequest {
+  string title = 1;
+  string description = 2;
+  repeated Question questions = 3;
+}
+
+message GetQuizRequest {
+  string id = 1;
+}
+
+message UpdateQuizRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  repeated Question questions = 4;
+}
+
+message DeleteQuizRequest {
+  string id = 1;
+}
+
+message DeleteQuizResponse {
+  bool success = 1;
+}
+
+message ListQuizzesRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListQuizzesResponse {
+  repeated Quiz quizzes = 1;
+  int32 total = 2;
+}
+
+message Quiz {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  repeated Question questions = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+
+message Question {
+  string id = 1;
+  string text = 2;
+  repeated string options = 3;
+  string correct_answer = 4;
+}
+
+message QuizResponse {
+  Quiz quiz = 1;
+}
+
+// Transaction Messages
+message CreateTransactionRequest {
+  string user_id = 1;
+  double amount = 2;
+  string type = 3;
+  string description = 4;
+}
+
+message GetTransactionRequest {
+  string id = 1;
+}
+
+message UpdateTransactionRequest {
+  string id = 1;
+  double amount = 2;
+  string type = 3;
+  string description = 4;
+}
+
+message DeleteTransactionRequest {
+  string id = 1;
+}
+
+message DeleteTransactionResponse {
+  bool success = 1;
+}
+
+message ListTransactionsRequest {
+  string user_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message ListTransactionsResponse {
+  repeated Transaction transactions = 1;
+  int32 total = 2;
+}
+
+message Transaction {
+  string id = 1;
+  string user_id = 2;
+  double amount = 3;
+  string type = 4;
+  string description = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message TransactionResponse {
+  Transaction transaction = 1;
+}
+
+// User Messages
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+  string first_name = 4;
+  string last_name = 5;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message UpdateUserRequest {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string first_name = 4;
+  string last_name = 5;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+}
+
+message ListUsersRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  string filter = 3;
+  string sort_by = 4;
+  string sort_order = 5;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string first_name = 4;
+  string last_name = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message UserResponse {
+  User user = 1;
+}
+
+message AuthenticateUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message AuthenticateUserResponse {
+  string token = 1;
+  User user = 2;
+}
+
+// Notification Messages
+message SendEmailRequest {
+  string to = 1;
+  string subject = 2;
+  string body = 3;
+  string attachment = 4;
+}
+
+message SendEmailResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SendNotificationRequest {
+  string user_id = 1;
+  string title = 2;
+  string message = 3;
+  string type = 4;
+}
+
+message SendNotificationResponse {
+  bool success = 1;
+  string notification_id = 2;
+}
+
+message GetNotificationsRequest {
+  string user_id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+}
+
+message GetNotificationsResponse {
+  repeated Notification notifications = 1;
+  int32 total = 2;
+}
+
+message Notification {
+  string id = 1;
+  string user_id = 2;
+  string title = 3;
+  string message = 4;
+  string type = 5;
+  bool is_read = 6;
+  string created_at = 7;
+}
+
+message MarkNotificationAsReadRequest {
+  string notification_id = 1;
+}
+
+message MarkNotificationAsReadResponse {
+  bool success = 1;
+}
+
+message DeleteNotificationRequest {
+  string notification_id = 1;
+}
+
+message DeleteNotificationResponse {
+  bool success = 1;
+} 

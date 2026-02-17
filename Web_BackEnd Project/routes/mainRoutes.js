@@ -1,17 +1,27 @@
 const express = require('express')
 const router = express.Router()
-const mainController = require('../controllers/mainController')
+const {
+	indexPage,
+	account,
+	adminPage,
+	stockMarketAPI,
+	newsAPI,
+	inRussianEmpirePage,
+	kazakhKhanatePage,
+	partOfUSSRPage,
+	quizPage,
+	cartPage,
+} = require('../controllers/mainController')
 
-router.get('/', mainController.indexPage)
-router.get('/account', mainController.account)
-router.get('/admin', mainController.adminPage)
-router.get('/stockmarketapi', mainController.stockMarketAPI)
-router.get('/newsapi', mainController.newsAPI)
-router.get('/inRussianEmpire', mainController.inRussianEmpirePage)
-router.get('/kazakhKhanate', mainController.kazakhKhanatePage)
-router.get('/partOfUSSR', mainController.partOfUSSRPage)
-router.get('/quiz', mainController.quizPage)
-router.post('/quiz/submit', mainController.submitQuiz)
-router.get('/quiz/questions', mainController.getQuizQuestions)
+router.get('/', indexPage)
+router.get('/account', account)
+router.get('/admin', adminPage)
+router.get('/stockmarketapi', stockMarketAPI)
+router.get('/newsapi', newsAPI)
+router.get('/inRussianEmpire', inRussianEmpirePage)
+router.get('/kazakhKhanate', kazakhKhanatePage)
+router.get('/partOfUSSR', partOfUSSRPage)
+router.get('/quiz', quizPage)
+router.get('/cart', cartPage)
 
 module.exports = router

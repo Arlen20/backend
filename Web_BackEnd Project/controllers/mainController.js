@@ -1,6 +1,7 @@
 const Landmark = require('../models/landmarkModel')
 const QuizResult = require('../models/QuizResult')
-const QuizQuestion = require('../models/quizQuestionModel')
+const Transaction = require('../models/transactionModel')
+const User = require('../models/userModel')
 
 exports.indexPage = async (req, res) => {
 	const landmarks = await Landmark.find()
@@ -29,13 +30,19 @@ exports.partOfUSSRPage = async (req, res) => {
 	res.render('partOfUSSR')
 }
 
-exports.account = (req, res) => {
+exports.account = async (req, res) => {
 	const user = req.session.user
 	const loggedIn = req.session.isLoggedIn
 	if (loggedIn) {
 		let isAdmin = false
 		isAdmin = user.role === 'admin'
-		res.render('account', { user, isAdmin, loggedIn })
+
+		// Fetch the latest transaction for the user
+		const transaction = await Transaction.findOne({
+			'customer.id': user._id,
+		}).sort({ updatedAt: -1 })
+
+		res.render('account', { user, isAdmin, loggedIn, transaction })
 	} else {
 		res.redirect('/')
 	}
@@ -150,4 +157,10 @@ exports.getQuizQuestions = async (req, res) => {
 		console.error('Error fetching quiz questions:', err)
 		res.status(500).send('An error occurred while fetching quiz questions.')
 	}
+}
+
+exports.cartPage = (req, res) => {
+	const user = req.session.user
+	const loggedIn = req.session.isLoggedIn
+	res.render('cart', { user, loggedIn })
 }
